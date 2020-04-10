@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetSeo.CoreMvc
@@ -10,9 +10,9 @@ namespace AspNetSeo.CoreMvc
 
         public ISeoHelper Seo => seoLazy.Value;
 
-        protected SeoController(HttpContext context)
+        protected SeoController()
         {
-            seoLazy = new Lazy<ISeoHelper>(this.GetSeoHelper(context));
+            seoLazy = new Lazy<ISeoHelper>(this.GetSeoHelper);
         }
     }
 }

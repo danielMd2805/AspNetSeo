@@ -1,21 +1,21 @@
 ﻿using System;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetSeo.CoreMvc
 {
     public static class ControllerBaseExtensions
     {
-        public static ISeoHelper GetSeoHelper(this ControllerBase controller, HttpContext context)
+        public static ISeoHelper GetSeoHelper(this ControllerBase controller)
         {
             if (controller == null)
                 throw new ArgumentNullException(nameof(controller));
 
-            var serviceProvider = context.RequestServices;
+            var serviceProvider = controller.HttpContext.RequestServices;
             if (serviceProvider == null)
             {
                 string message =
-                    $"The {nameof(context.RequestServices)} of the provided {nameof(ControllerBase)} cannot be null.";
+                    $"The {nameof(controller.HttpContext.RequestServices)} of the provided {nameof(ControllerBase)} cannot be null.";
                 throw new ArgumentOutOfRangeException(nameof(controller), message);
             }
 
